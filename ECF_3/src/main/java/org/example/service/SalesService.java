@@ -1,35 +1,60 @@
 package org.example.service;
 
 import org.example.entity.Sales;
+import org.example.entity.SalesEnum;
 import org.example.interfaces.Repository;
+import org.hibernate.Query;
 
 import java.util.List;
 
 public class SalesService extends BaseService implements Repository<Sales> {
 
-    @Override
     public boolean create(Sales o) {
-        return false;
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(o);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean update(Sales o) {
-        return false;
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.update(o);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(Sales o) {
-        return false;
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.delete(o);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     @Override
     public Sales findById(int id) {
-        return null;
+        session = sessionFactory.openSession();
+        Sales sales = session.get(Sales.class, id);
+        session.close();
+        return sales;
     }
 
     @Override
     public List<Sales> findAll() {
-        return null;
+        List <Sales> salesList = null;
+        session = sessionFactory.openSession();
+        Query<Sales> salesQuery = session.createQuery("from Sales ");
+        salesList = salesQuery.list();
+        session.close();
+        return salesList;
+
     }
 
     @Override

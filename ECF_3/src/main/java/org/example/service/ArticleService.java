@@ -31,7 +31,7 @@ public class ArticleService extends BaseService implements Repository<Article> {
     public boolean update(Article o) {
         session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(o);
+        session.update(o);
         session.getTransaction().commit();
         session.close();
         return true;
@@ -41,7 +41,7 @@ public class ArticleService extends BaseService implements Repository<Article> {
     public boolean delete(Article o) {
         session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(o);
+        session.delete(o);
         session.getTransaction().commit();
         session.close();
         return true;

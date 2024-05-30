@@ -21,7 +21,7 @@ public class ClientService extends BaseService implements Repository<Client> {
     public boolean update(Client o) {
         session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(o);
+        session.update(o);
         session.getTransaction().commit();
         session.close();
         return true;
@@ -31,7 +31,7 @@ public class ClientService extends BaseService implements Repository<Client> {
     public boolean delete(Client o) {
         session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(o);
+        session.delete(o);
         session.getTransaction().commit();
         session.close();
         return true;

@@ -22,12 +22,17 @@ public class Sales {
     @ManyToMany(mappedBy = "sales")
     private Set<Client> clients = new HashSet<>();
 
-    public Sales(int id, SalesEnum salesEnum, String receipt, Set<Client> clients) {
+    public Sales() {
+
+    }
+
+    public Sales(SalesEnum salesEnum, String receipt, Class<Client> clientClass, int id) {
         this.id = id;
         this.salesEnum = salesEnum;
         this.receipt = receipt;
         this.clients = clients;
     }
+
 
     public Set<Client> getClients() {
         return clients;
