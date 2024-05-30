@@ -6,5 +6,7 @@
     <session-factory>
         <mapping class="org.example.entity.Article"/>
         <mapping class="org.example.entity.Client"/>
+        <mapping class="org.example.entity.Sales"/>
+        <mapping class="org.example.entity.SalesClient"/>
     </session-factory>
 </hibernate-configuration>

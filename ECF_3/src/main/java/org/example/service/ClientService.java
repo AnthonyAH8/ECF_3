@@ -57,6 +57,6 @@ public class ClientService extends BaseService implements Repository<Client> {
 
     @Override
     public void close() {
-
+        sessionFactory.close();
     }
 }

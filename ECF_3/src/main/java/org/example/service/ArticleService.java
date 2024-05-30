@@ -5,7 +5,6 @@ import org.example.interfaces.Repository;
 import org.hibernate.Query;
 
 import java.util.List;
-import java.util.Queue;
 
 public class ArticleService extends BaseService implements Repository<Article> {
     public ArticleService(){

@@ -1,9 +1,8 @@
 package org.example.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 //Créer, modifier, supprimer et consulter les informations des
 //clients.
@@ -22,6 +21,14 @@ public class Client {
     private String clientMail;
 
     private String orderHistory;
+
+    @ManyToMany
+    @JoinTable(
+            name = "sales_client",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "sale_id")
+    )
+    private Set<Sales> sales = new HashSet<>();
 
     public Client(){
 

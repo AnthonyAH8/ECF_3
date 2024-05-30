@@ -1,9 +1,8 @@
 package org.example.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 //Enregistrer les ventes réalisées en magasin.
 //Suivre l'état des ventes (en cours, finalisée, annulée).
@@ -19,6 +18,24 @@ public class Sales {
     private SalesEnum salesEnum;
 
     private String receipt;
+
+    @ManyToMany(mappedBy = "sales")
+    private Set<Client> clients = new HashSet<>();
+
+    public Sales(int id, SalesEnum salesEnum, String receipt, Set<Client> clients) {
+        this.id = id;
+        this.salesEnum = salesEnum;
+        this.receipt = receipt;
+        this.clients = clients;
+    }
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
+    }
 
     public int getId() {
         return id;
