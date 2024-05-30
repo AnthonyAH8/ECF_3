@@ -23,6 +23,16 @@ public class Client {
 
     private String orderHistory;
 
+    public Client(){
+
+    }
+
+    public Client(String clientName, String clientMail, String orderHistory) {
+        this.clientName = clientName;
+        this.clientMail = clientMail;
+        this.orderHistory = orderHistory;
+    }
+
     public int getId() {
         return id;
     }

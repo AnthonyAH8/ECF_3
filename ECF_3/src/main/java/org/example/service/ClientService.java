@@ -1,68 +1,62 @@
 package org.example.service;
 
-import org.example.entity.Article;
+import org.example.entity.Client;
 import org.example.interfaces.Repository;
 import org.hibernate.Query;
 
 import java.util.List;
-import java.util.Queue;
 
-public class ArticleService extends BaseService implements Repository<Article> {
-    public ArticleService(){
-        super();
+public class ClientService extends BaseService implements Repository<Client> {
+    @Override
+    public boolean create(Client o) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(o);
+        session.getTransaction().commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public boolean update(Client o) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(o);
+        session.getTransaction().commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public boolean delete(Client o) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(o);
+        session.getTransaction().commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public Client findById(int id) {
+        session = sessionFactory.openSession();
+        Client client = session.get(Client.class, id);
+        session.close();
+        return client;
+    }
+
+    @Override
+    public List<Client> findAll() {
+       List <Client> clientList = null;
+       session = sessionFactory.openSession();
+        Query <Client> clientQuery = session.createQuery("from Client");
+        clientList = clientQuery.list();
+        session.close();
+        return clientList;
     }
 
     @Override
     public void close() {
 
-        sessionFactory.close();
-    }
-
-    @Override
-    public boolean create(Article o) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(o);
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
-
-    @Override
-    public boolean update(Article o) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(o);
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
-
-    @Override
-    public boolean delete(Article o) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(o);
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
-
-    @Override
-    public Article findById(int id) {
-        session = sessionFactory.openSession();
-        Article article = session.get(Article.class, id);
-        session.close();
-        return article;
-    }
-
-    @Override
-    public List<Article> findAll() {
-        List <Article> articleList = null;
-        session = sessionFactory.openSession();
-        Query <Article> articleQuery = session.createQuery("from Article ");
-        articleList = articleQuery.list();
-        session.close();
-        return articleList;
     }
 }

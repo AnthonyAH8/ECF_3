@@ -1,7 +1,10 @@
 package org.example;
 
 import org.example.entity.Article;
+import org.example.entity.Client;
 import org.example.service.ArticleService;
+import org.example.service.ClientService;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,45 +12,52 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
-
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure().build();
-
-        SessionFactory sessionFactory = new MetadataSources(registry)
-                .buildMetadata().buildSessionFactory();
+        ArticleService articleService = new ArticleService();
+        articleService.create(new Article("t-shirt", "haut", "xl", 10.00, 10));
+        articleService.create(new Article("pantalon", "bas", "42", 30.00, 10));
+        articleService.create(new Article("doudoune", "haut", "xl", 59.99, 10));
 
 
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.getTransaction();
+        List<Article> articleList = articleService.findAll();
+        for (Article article : articleList) {
+            System.out.println(article);
+        }
 
-        session.getTransaction().begin();
+        articleService.delete(articleService.findById(2));
 
-//        Article article1 = new Article();
-//
-//        article1.setDescription("T-shirt");
-//        article1.setCategory("Haut");
-//        article1.setHeight("xl");
-//        article1.setPrice(249.99);
-//        article1.setStock(10);
-//
-//        session.save(article1);
+        Article articleUpdate = articleService.findById(1);
+        if (articleUpdate != null) {
+            articleUpdate.setPrice(20.00);
+        } else {
+            System.out.println("Article non trouvé.");
+        }
+        System.out.println(articleUpdate);
 
-        Article article2 = new Article();
+        articleService.close();
 
-        article2.setDescription("Pantalon chino");
-        article2.setCategory("Bas");
-        article2.setHeight("42");
-        article2.setPrice(39.99);
-        article2.setStock(50);
+        ClientService clientService = new ClientService();
+        clientService.create(new Client("John", "John@gmail.com", "none"));
+        clientService.create(new Client("Doe", "Doe@gmail.com", "t-shirt"));
+        clientService.create(new Client("John", "John@gmail.com", "doudoune"));
 
-        session.save(article2);
+        List <Client> clientList = clientService.findAll();
+        for (Client client : clientList){
+            System.out.println(client);
+        }
 
-        transaction.commit();
+        Client clientUpdate = clientService.findById(8);
+        if (clientUpdate != null) {
+            clientUpdate.setClientName("Jane");
+        } else {
+            System.out.println("Client non trouvé.");
+        }
 
-        session.close();
-        sessionFactory.close();
+        clientService.delete(clientService.findById(6));
 
+        clientService.close();
+        }
     }
-}

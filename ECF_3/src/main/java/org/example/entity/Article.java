@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "article")
@@ -20,6 +21,17 @@ public class Article {
 
     private int stock;
 
+    public Article(){
+
+    }
+
+    public  Article(String description, String category, String height, double price, int stock){
+        this.description = description;
+        this.category = category;
+        this.height = height;
+        this.price = price;
+        this.stock = stock;
+    }
     public int getId() {
         return id;
     }
@@ -74,7 +86,7 @@ public class Article {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
-                ", height=" + height +
+                ", height='" + height + '\'' +
                 ", price=" + price +
                 ", stock=" + stock +
                 '}';
