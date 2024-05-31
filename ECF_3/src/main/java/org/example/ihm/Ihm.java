@@ -4,11 +4,13 @@ import java.util.*;
 
 import org.example.entity.Article;
 import org.example.entity.Client;
+import org.example.entity.Sales;
 import org.example.entity.SalesClient;
 import org.example.service.ArticleService;
 import org.example.service.ClientService;
 import org.example.service.SalesClientService;
 import org.example.service.SalesService;
+import org.hibernate.Query;
 
 public class Ihm {
     private ArticleService articleService;
@@ -54,7 +56,10 @@ public class Ihm {
                     break;
                 case 8:
                     deleteClientById();
-                    break;                    
+                    break;
+                case 9:
+                    displaySales(null);
+                    break;                       
                 default:
                     continue;
             }
@@ -64,6 +69,16 @@ public class Ihm {
 
     private void menu() {
         System.out.println("Système de gestion d'inventaire");
+        System.out.println("===============================");
+        System.out.println("1. Créer des articles");
+        System.out.println("2. Voir la liste des articles");
+        System.out.println("3. Modifier un article");
+        System.out.println("4. Supprimer un article");
+        System.out.println("5. Créer un profil client");
+        System.out.println("6. Voir la liste des clients");
+        System.out.println("7. Modifier un profil client");
+        System.out.println("8. Supprimer un profil client");
+        System.out.println("Votre choix :");
     }
     private void createArticle(){
        articleService.create(new Article("t-shirt", "haut", "xl", 10.00, 10));
@@ -118,4 +133,14 @@ public class Ihm {
     private void deleteClientById(){
         clientService.delete(clientService.findById(6));
     }
+
+    
+
+    private void displaySales(List<Sales> salesList) {
+        List <Sales> sales = salesService.findAll();
+        for (Sales sale : salesList) {
+            System.out.println(sale);
+        }
+    }
 }
+

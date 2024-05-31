@@ -57,6 +57,31 @@ public class SalesService extends BaseService implements Repository<Sales> {
 
     }
 
+    // @Override
+    // public List<Sales> getSalesByCategory(String category) {
+    //     Query<Sales> query = session.createQuery("from Sales where article.category = :category");
+    //     query.setParameterList("category");
+    //     List<Sales> salesList = query.list();
+    //     return salesList;
+    // }
+
+    // @Override
+    // public List<Sales> getSalesByPeriod(String startDate, String endDate) {
+    //     Query<Sales> query = session.createQuery("from Sales where date between :startDate and :endDate");
+    //     query.setParameterList("startDate", startDate);
+    //     query.setParameterList("endDate", endDate);
+    //     List<Sales> salesList = query.list();
+    //     return salesList;
+    // }
+
+    // @Override
+    // public List<Sales> getSalesByClient(int clientId) {
+    //     Query<Sales> query = session.createQuery("from Sales where client.id = :client_id");
+    //     query.setParameterList("clientId", clientId);
+    //     List<Sales> salesList = query.list();
+    //     return salesList;
+    // }
+
     @Override
     public void close() {
         sessionFactory.close();

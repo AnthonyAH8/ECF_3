@@ -4,6 +4,8 @@ import org.example.entity.Article;
 import org.example.interfaces.Repository;
 import org.hibernate.Query;
 
+import com.mysql.cj.Session;
+
 import java.util.List;
 
 public class ArticleService extends BaseService implements Repository<Article> {
@@ -63,5 +65,13 @@ public class ArticleService extends BaseService implements Repository<Article> {
         articleList = articleQuery.list();
         session.close();
         return articleList;
+    }
+
+    public List<Article> getAvailableStock() {
+        session = sessionFactory.openSession();
+        Query<Article> query = session.createQuery("from Article where stock > 0", Article.class);
+        List<Article> article = query.list();
+        session.close();
+        return article;
     }
 }
