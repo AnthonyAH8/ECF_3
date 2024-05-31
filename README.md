@@ -130,6 +130,9 @@ public class Article {
 }
 ```
 
+### Informations complémentaires
+
+L'implémentation du stock et des statistiques n'a pas été terminé, il a été cependant débuté.
 
 ### Auteur
 
